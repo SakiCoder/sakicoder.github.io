@@ -11,6 +11,46 @@ render = () => {
     document.getElementById('buttons').classList.remove('hidden');
     document.getElementById('grid').classList.remove('hidden');
 }; render();
+boardValid = (bo) => {
+    // check row
+    for (let i = 0; i < bo.length; i++) {
+        numbers = [];
+        for (let j = 0; j < bo[i].length; j++) {
+            const number = bo[i][j];
+            if (numbers.includes(number) && number != "") {
+                return false;
+            }
+            numbers.push(number)
+        }
+    }
+    // check column
+    for (let i = 0; i < bo.length; i++) {
+        numbers = [];
+        for (let j = 0; j < bo[i].length; j++) {
+            const number = bo[j][i];
+            if (numbers.includes(number) && number != "") {
+                return false;
+            }
+            numbers.push(number)
+        }
+    }
+    // check square
+    for (let boxX = 0; boxX < 3; boxX++) {
+        for (let boxY = 0; boxY < 3; boxY++) {
+            numbers = [];
+            for (let i = boxX * 3; i < boxX * 3 + 3; i++) {
+                for (let j = boxY * 3; j < boxY * 3 + 3; j++) {
+                    const number = bo[i][j];
+                    if (numbers.includes(number) && number != "") {
+                        return false;
+                    }
+                    numbers.push(number)
+                }
+            }
+        }
+    }
+    return true;
+}
 isValid = (board, row, col, k) => {
     for (let i = 0; i < 9; i++) {
         const m = 3 * Math.floor(row / 3) + Math.floor(i / 3);
@@ -43,8 +83,6 @@ solve = (data) => {
 }
 document.getElementById('solve').addEventListener('click', () => {
     const loader = document.getElementById("loading");
-    loader.classList.remove("hidden");
-    myNodelist = document.getElementsByClassName('cell');
     let board = [];
     for (let i = 0; i < 9; i++) {
         let row = [];
@@ -53,21 +91,20 @@ document.getElementById('solve').addEventListener('click', () => {
         }
         board.push(row);
     }
-    solve(board);
-    setTimeout(() => {
-        loader.classList.add("hidden");
-        for (let i = 0; i < board.length; i++) {
-            for (let j = 0; j < board[i].length; j++) {
-                index = i*9+j;
-                if (document.getElementById(`cell-${index}`).value == board[i][j]) {
-                    document.getElementById(`cell-${index}`).classList.add('grey');
-                } else {
-                    document.getElementById(`cell-${index}`).value = board[i][j];
-                    document.getElementById(`cell-${index}`).classList.remove('grey');
-                }
+    if (boardValid(board)) {
+        solve(board);
+    }
+    for (let i = 0; i < board.length; i++) {
+        for (let j = 0; j < board[i].length; j++) {
+            index = i*9+j;
+            if (document.getElementById(`cell-${index}`).value == board[i][j]) {
+                document.getElementById(`cell-${index}`).classList.add('grey');
+            } else {
+                document.getElementById(`cell-${index}`).value = board[i][j];
+                document.getElementById(`cell-${index}`).classList.remove('grey');
             }
         }
-    }, 500);
+    }
 })
 document.getElementById('reset').addEventListener('click', () => {
     for (let index = 0; index < 81; index++) {
