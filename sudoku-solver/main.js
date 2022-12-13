@@ -82,7 +82,6 @@ solve = (data) => {
     return true;
 }
 document.getElementById('solve').addEventListener('click', () => {
-    const loader = document.getElementById("loading");
     let board = [];
     for (let i = 0; i < 9; i++) {
         let row = [];
@@ -93,15 +92,15 @@ document.getElementById('solve').addEventListener('click', () => {
     }
     if (boardValid(board)) {
         solve(board);
-    }
-    for (let i = 0; i < board.length; i++) {
-        for (let j = 0; j < board[i].length; j++) {
-            index = i*9+j;
-            if (document.getElementById(`cell-${index}`).value == board[i][j]) {
-                document.getElementById(`cell-${index}`).classList.add('grey');
-            } else {
-                document.getElementById(`cell-${index}`).value = board[i][j];
-                document.getElementById(`cell-${index}`).classList.remove('grey');
+        for (let i = 0; i < board.length; i++) {
+            for (let j = 0; j < board[i].length; j++) {
+                index = i*9+j;
+                if (document.getElementById(`cell-${index}`).value == board[i][j]) {
+                    document.getElementById(`cell-${index}`).classList.add('grey');
+                } else {
+                    document.getElementById(`cell-${index}`).value = board[i][j];
+                    document.getElementById(`cell-${index}`).classList.remove('grey');
+                }
             }
         }
     }
