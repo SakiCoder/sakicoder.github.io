@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     function calculateBestPossibleAverage(values) {
+        console.log(values);
         const sanitizedValues = values.map(value => value === '' ? 0 : value);
         const sortedValues = sanitizedValues.sort((a, b) => a - b);
         const middleValues = sortedValues.slice(1, -1);
@@ -7,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return sum / middleValues.length;
     }
     function calculateWorstPossibleAverage(values) {
+        console.log(values);
         const sanitizedValues = values.map(value => value === '' ? Infinity : value);
         const sortedValues = sanitizedValues.sort((a, b) => a - b);
         const middleValues = sortedValues.slice(1, -1);
@@ -20,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         bestAverageDisplay.innerHTML = (bestAverage.toFixed(2));
         worstAverageDisplay.innerHTML = (worstAverage.toFixed(2));
     }
-    const inputBoxes = document.querySelectorAll('input[type="text"]');
+    const inputBoxes = document.querySelectorAll('input[type="number"]');
     bestAverageDisplay = document.getElementById('best-average');
     worstAverageDisplay = document.getElementById('worst-average');
     updateAverages();
