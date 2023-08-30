@@ -76,6 +76,10 @@
             function updateCount(count) {
                 setCount(count);
                 localStorage.setItem('count', count);
+                if (count % 100 === 0 || count == 1008) {
+                    const audio = new Audio('sound.mp3');
+                    audio.play();
+                }
             }
             function resetCount() {
                 var result = confirm('Are you sure you want to reset the counter to 0?')
