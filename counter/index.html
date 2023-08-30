@@ -16,9 +16,11 @@
     <script type="text/babel">
         const buttonContainerStyles = {
             display: 'flex',
-            position: 'relative',
             flexDirection: 'column',
+            justifyContent: 'space-between',
+            alignItems: 'center',
             height: '100vh',
+            height: '-webkit-fill-available',
         };
 
         const countStyles = {
@@ -27,12 +29,10 @@
             color: 'white',
             fontSize: '60px',
             textAlign: 'center',
-            position: 'absolute',
-            top: 0,
         };
 
         const plusButtonStyles = {
-            flex: 1,
+            flexGrow: 1,
             width: '100%',
             fontSize: '200px',
             borderRadius: '0%',
@@ -42,15 +42,13 @@
             display: 'flex', 
             justifyContent: 'space-between', 
             width: '100%',
-            position: 'absolute',
-            bottom: 0,
         }
 
         const smallButtonStyles = {
             width: '50%',
+            padding: '10px 20px',
             fontSize: '18px',
             borderRadius: '0%',
-            padding: '10px 20px',
         };
 
         function App() {
