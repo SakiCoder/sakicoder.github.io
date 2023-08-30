@@ -77,13 +77,19 @@
                 setCount(count);
                 localStorage.setItem('count', count);
             }
+            function resetCount() {
+                var result = confirm('Are you sure you want to reset the counter to 0?')
+                if (result === true) {
+                    updateCount(0);
+                }
+            }
             return (
                 <div style={buttonContainerStyles}>
                     <div style={countStyles}>{count}</div>
                     <button className="btn btn-success" style={plusButtonStyles} onClick={() => updateCount(count + 1)}>+</button>
                     <div style={smallButtonDivStyles}>
                         <button className="btn btn-danger" style={smallButtonStyles} onClick={() => updateCount(count - 1)}>Count down</button>
-                        <button className="btn btn-primary" style={smallButtonStyles} onClick={() => updateCount(count - count)}>Reset to 0</button>
+                        <button className="btn btn-primary" style={smallButtonStyles} onClick={resetCount}>Reset to 0</button>
                     </div>
                 </div>
             );
